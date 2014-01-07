@@ -29,7 +29,6 @@ public class WeatherForecastService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		resultReceiver = intent.getParcelableExtra("receiverTag");
-		Log.d("SERVICE", "event handled");
 		double lat = intent.getDoubleExtra("lat", 0);
 		double lng = intent.getDoubleExtra("lng", 0);
 		String unit = intent.getStringExtra("unit");
@@ -75,28 +74,68 @@ public class WeatherForecastService extends IntentService {
 						response += s;
 					}
 					jsonObject = new JSONObject(response);
+					Log.d("complete json", jsonObject.toString());
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 			try {
-				
+				JSONObject list = null;
+				JSONObject main = null;
+				JSONObject wind = null;
+				JSONObject rain = null;
+				JSONObject clouds = null;
 				answer = new JSONObject();
-				JSONObject list = jsonObject.getJSONArray("list").getJSONObject(0);
-				JSONObject main = list.getJSONObject("main");
-				JSONObject wind = list.getJSONObject("wind");
-				JSONObject rain = list.getJSONObject("rain");
-				JSONObject clouds = list.getJSONObject("clouds");
+				if(jsonObject.has("list")) list = jsonObject.getJSONArray("list").getJSONObject(0);
+				if(list.has("main")) main = list.getJSONObject("main");
+				if(list.has("wind")) wind = list.getJSONObject("wind");
+				if(list.has("rain")) rain = list.getJSONObject("rain");
+				if(list.has("clouds")) clouds = list.getJSONObject("clouds");
 				
-				answer.put("city", list.getString("name"));
-				answer.put("temp", main.getString("temp"));
-				answer.put("tempMin", main.getString("temp_min"));
-				answer.put("tempMax", main.getString("temp_max"));
-				answer.put("wind", wind.getString("speed"));
-				answer.put("rain", rain.getString("3h"));
-				answer.put("clouds", clouds.getString("all"));
+//				if(list.has("name")) answer.put("city", list.getString("name"));
+//				if(main.has("temp")) answer.put("temp", main.getString("temp"));
+//				if(main.has("temp_min")) answer.put("tempMin", main.getString("temp_min"));
+//				if(main.has("temp_max")) answer.put("tempMax", main.getString("temp_max"));
+//				if(list.has("wind")) answer.put("wind", wind.getString("speed"));
+//				if(list.has("rain")) answer.put("rain", rain.getString("3h"));
+//				if(list.has("clouds")) answer.put("clouds", clouds.getString("all"));
 
+				if(list.has("name")){
+					answer.put("city", list.getString("name"));
+				}else{
+					answer.put("city", "");
+				}				
+				if(main.has("temp")){
+					answer.put("temp", main.getString("temp"));
+				}else{
+					answer.put("temp", "");
+				}
+				if(main.has("temp_min")){
+					answer.put("tempMin", main.getString("temp_min"));
+				}else{
+					answer.put("tempMin", "");
+				}
+				if(main.has("temp_max")){
+					answer.put("tempMax", main.getString("temp_max"));
+				}else{
+					answer.put("tempMax", "");
+				}
+				if(list.has("wind")){
+					answer.put("wind", wind.getString("speed"));
+				}else{
+					answer.put("wind", "");
+				}
+				if(rain!=null && rain.has("3h")){
+					answer.put("rain", Double.parseDouble(rain.getString("3h"))*100);
+				}else{
+					answer.put("rain", "");
+				}
+				if(list.has("clouds")){
+					answer.put("clouds", clouds.getString("all"));
+				}else{
+					answer.put("clouds", "");
+				}
 				
 				Log.d("answer", answer.toString());
 			} catch (JSONException e1) {
