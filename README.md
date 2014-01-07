@@ -10,9 +10,9 @@ Nutzt die Openweathermap.org API, um eine Wetterabfrage von einer Koordinate (la
 
 ## JSON Antwort
 
-temp      Temperatur in °C               mandatory    
-tempMin   min Temperatur in °C           optional    
-tempMax   max Temperatur in °C           optional    
-wind      Windgeschwindigkeit in km/s    mandatory   
-clouds    Bewökung in %                  mandatory   
-rain      Regenwahrscheinlichkeit in %   optional    
+* temp - Temperatur in °C - mandatory    
+* tempMin - min Temperatur in °C - optional    
+* tempMax - max Temperatur in °C - optional    
+* wind - Windgeschwindigkeit in km/s - mandatory   
+* clouds - Bewökung in % - mandatory   
+* rain - Regenwahrscheinlichkeit in % - optional    
