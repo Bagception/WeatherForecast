@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.uniulm.bagception.weatherforecast"
+    package="de.uniulm.bagception.weatherforecast.service"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme" >
         <service android:name="WeatherForecastService">
              <intent-filter>
-             		<action android:name="de.uniulm.bagception.weatherforecast.WeatherForecastService" />
+             		<action android:name="de.uniulm.bagception.service.WeatherForecastService" />
           </intent-filter>
         </service>
     </application>
