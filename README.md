@@ -4,9 +4,9 @@ Nutzt die Openweathermap.org API, um eine Wetterabfrage von einer Koordinate (la
 
 ## Anfrageparameter
 
-lat      Latitude als Double-Wert        mandatory
-lng      Longitude als Double-Wert       mandatory
-unit     "metric" oder "imperial"        optional
+* lat - Latitude als Double-Wert - mandatory
+* lng - Longitude als Double-Wert- mandatory
+* unit - "metric" oder "imperial" - optional
 
 ## JSON Antwort
 
