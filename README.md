@@ -1,6 +1,18 @@
-temp - Temperatur in °C   
-temp.min - min Temperatur in °C   
-temp.max - max Temperatur in °C   
-wind - Windgeschwindigkeit in km/s   
-clouds - Bewökung in %   
-rain - Regenwahrscheinlichkeit in %   
+# Weatherforecast Service API
+
+Nutzt die Openweathermap.org API, um eine Wetterabfrage von einer Koordinate (lat,lng) zu generieren.
+
+## Anfrageparameter
+
+lat      Latitude als Double-Wert        mandatory
+lng      Longitude als Double-Wert       mandatory
+unit     "metric" oder "imperial"        optional
+
+## JSON Antwort
+
+temp      Temperatur in °C               mandatory    
+tempMin   min Temperatur in °C           optional    
+tempMax   max Temperatur in °C           optional    
+wind      Windgeschwindigkeit in km/s    mandatory   
+clouds    Bewökung in %                  mandatory   
+rain      Regenwahrscheinlichkeit in %   optional    
