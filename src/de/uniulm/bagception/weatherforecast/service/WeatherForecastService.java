@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.uniulm.bagception.services.attributes.WeatherForecast;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -29,9 +31,9 @@ public class WeatherForecastService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		resultReceiver = intent.getParcelableExtra("receiverTag");
-		double lat = intent.getDoubleExtra("lat", 0);
-		double lng = intent.getDoubleExtra("lng", 0);
-		String unit = intent.getStringExtra("unit");
+		double lat = intent.getDoubleExtra(WeatherForecast.LATITUDE, 0);
+		double lng = intent.getDoubleExtra(WeatherForecast.LONGITUDE, 0);
+		String unit = intent.getStringExtra(WeatherForecast.UNIT);
 		
 		if(unit!=null){
 			unit = "&units="+ unit;
@@ -102,42 +104,42 @@ public class WeatherForecastService extends IntentService {
 //				if(list.has("clouds")) answer.put("clouds", clouds.getString("all"));
 
 				if(list.has("name")){
-					answer.put("city", list.getString("name"));
+					answer.put(WeatherForecast.CITY, list.getString("name"));
 				}else{
-					answer.put("city", "");
+					answer.put(WeatherForecast.CITY, "");
 				}				
 				if(main.has("temp")){
-					answer.put("temp", main.getString("temp"));
+					answer.put(WeatherForecast.TEMP, main.getString("temp"));
 				}else{
-					answer.put("temp", "");
+					answer.put(WeatherForecast.TEMP, "");
 				}
 				if(main.has("temp_min")){
-					answer.put("tempMin", main.getString("temp_min"));
+					answer.put(WeatherForecast.TEMP_MIN, main.getString("temp_min"));
 				}else{
-					answer.put("tempMin", "");
+					answer.put(WeatherForecast.TEMP_MIN, "");
 				}
 				if(main.has("temp_max")){
-					answer.put("tempMax", main.getString("temp_max"));
+					answer.put(WeatherForecast.TEMP_MAX, main.getString("temp_max"));
 				}else{
-					answer.put("tempMax", "");
+					answer.put(WeatherForecast.TEMP_MAX, "");
 				}
 				if(list.has("wind")){
-					answer.put("wind", wind.getString("speed"));
+					answer.put(WeatherForecast.WIND, wind.getString("speed"));
 				}else{
-					answer.put("wind", "");
+					answer.put(WeatherForecast.WIND, "");
 				}
 				if(rain!=null && rain.has("3h")){
-					answer.put("rain", Double.parseDouble(rain.getString("3h"))*100);
+					answer.put(WeatherForecast.RAIN, Double.parseDouble(rain.getString("3h"))*100);
 				}else{
-					answer.put("rain", "");
+					answer.put(WeatherForecast.RAIN, "");
 				}
 				if(list.has("clouds")){
-					answer.put("clouds", clouds.getString("all"));
+					answer.put(WeatherForecast.CLOUDS, clouds.getString("all"));
 				}else{
-					answer.put("clouds", "");
+					answer.put(WeatherForecast.CLOUDS, "");
 				}
 				
-				Log.d("answer", answer.toString());
+//				Log.d("answer", answer.toString());
 			} catch (JSONException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

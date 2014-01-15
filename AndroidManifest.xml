@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme" >
         <service android:name="WeatherForecastService">
              <intent-filter>
-             		<action android:name="de.uniulm.bagception.service.WeatherForecastService" />
+             		<action android:name="de.uniulm.bagception.weatherforecast.service.WeatherForecastService" />
           </intent-filter>
         </service>
     </application>
